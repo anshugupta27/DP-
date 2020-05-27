@@ -1,0 +1,43 @@
+https://practice.geeksforgeeks.org/problems/longest-common-substring/0
+
+
+
+#include<bits/stdc++.h>
+#define int long long int 
+#define TRY_HARD ios_base::sync_with_stdio(false);  cin.tie(NULL);  cout.tie(NULL);
+using namespace std;
+int dp[105][105] ;
+int longestCommonSubstring ( string s1 , string s2 , int n , int m )
+{
+    int Max = INT_MIN ;
+    for ( int i = 1 ; i <= n ; i++ )
+    {
+        for ( int j = 1 ; j <= m ; j++ )
+        {
+            if ( s1[i-1] == s2[j-1] )
+            dp[i][j] = 1 + dp[i-1][j-1] ;
+            else
+            dp[i][j] = 0 ;
+            Max = max ( Max , dp[i][j] ) ;
+        }
+    }
+    return Max ;
+}
+
+
+signed main()
+ {
+	TRY_HARD ;
+	int t ;
+	cin >> t ;
+	while ( t-- )
+	{
+	    int n , m ;
+	    cin >> n >> m ;
+	    string x , y ;
+	    cin >> x >> y ;
+	    memset ( dp , 0 , sizeof(dp) ) ;
+	    cout << longestCommonSubstring ( x , y , n , m ) << endl ;
+	}
+	
+}
