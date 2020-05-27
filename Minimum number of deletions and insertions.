@@ -1,0 +1,52 @@
+https://practice.geeksforgeeks.org/problems/minimum-number-of-deletions-and-insertions/0
+
+Given two strings ‘str1’ and ‘str2’ of size m and n respectively. 
+The task is to remove/delete and insert minimum number of characters from/in str1 so as to transform it into str2.
+It could be possible that the same character needs to be removed/deleted from one point of str1 and inserted to some
+another point.
+
+
+
+#include<bits/stdc++.h>
+#define int long long int 
+#define TRY_HARD ios_base::sync_with_stdio(false);  cin.tie(NULL);  cout.tie(NULL);
+using namespace std;
+int dp[1005][1005] ;
+int lcs ( string s1 , string s2 )
+{
+    for ( int i = 1 ; i <= s1.length() ; i++ )
+    {
+        for ( int j = 1 ; j <= s2.length() ; j++ )
+        {
+            if ( s1[i-1] == s2[j-1] )
+            dp[i][j] = 1 + dp[i-1][j-1] ;
+            else
+            dp[i][j] = max ( dp[i-1][j] , dp[i][j-1] ) ;
+        }
+    }
+    return dp[s1.length()][s2.length()] ;
+}
+
+
+signed main()
+ {
+	TRY_HARD ;
+	int t ;
+	cin >> t ;
+	while ( t-- )
+	{
+	    int n , m ;
+	    cin >> n >> m ;
+	    string s1 , s2 ;
+	    cin >> s1 >> s2 ;
+	    
+	    //int insertion = s2.length() - lcs ( s1 , s2 ) ;
+	    //int deletion = s1.length() - lcs ( s1 , s2 ) ;
+	    
+	    memset ( dp , 0 , sizeof(dp) ) ;
+	    int p = lcs ( s1 , s2 ) ;
+	    cout << ( s2.length() - p ) + ( s1.length() - p ) << "\n" ;
+	}
+	
+}
+
